@@ -24,6 +24,7 @@ func main() {
 	pool, err := pgxpool.New(ctx, dbUrl)
 	if err != nil {
 		fmt.Println("db connection failed", err)
+		return
 	}
 	defer pool.Close()
 
@@ -48,7 +49,7 @@ func main() {
 			title := scanner.Text()
 			if title == "" {
 				fmt.Println("title is required")
-				return
+				continue
 			}
 			fmt.Println("enter a description")
 			scanner.Scan()

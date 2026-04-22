@@ -1,0 +1,22 @@
+// GetTasks
+import "context"
+
+var (
+	queries *db.Queries
+	tasks   []string
+)
+
+func GetTasks() []string {
+	if queries == nil {
+		return tasks
+	}
+	items, err := queries.ListTasks(context.Background())
+	if err != nil {
+		return tasks
+	}
+	var res []string
+	for _, item := range items {
+		res = append(res, item.Title)
+	}
+	return res
+}
